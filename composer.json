@@ -7,10 +7,16 @@
     "require": {
         "php": ">=7.0.0",
         "backpack/base": "^0.8.6",
+        "backpack/crud": "^3.3",
+        "backpack/langfilemanager": "^1.0",
+        "backpack/permissionmanager": "^2.1",
+        "backpack/settings": "^2.0",
+        "barryvdh/laravel-ide-helper": "^2.4",
         "fideloper/proxy": "~3.3",
         "imokhles/multi-auth-command": "^1.0",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "orangehill/iseed": "dev-master"
     },
     "require-dev": {
         "backpack/generators": "^1.1",

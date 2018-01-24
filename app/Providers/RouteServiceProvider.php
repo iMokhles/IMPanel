@@ -43,6 +43,10 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapAdminRoutes();
 
+        $this->mapBackpackRoutes();
+
+        $this->mapAdminApiRoutes();
+
         //
     }
 
@@ -74,6 +78,36 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('admin')
             ->namespace($this->namespace.'\\Admin')
             ->group(base_path('routes/admin/admin.php'));
+    }
+
+    /**
+     * Define the "admin_api" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapAdminApiRoutes()
+    {
+        Route::prefix('admin/api')
+            ->middleware('admin_api')
+            ->namespace($this->namespace.'\\Admin')
+            ->group(base_path('routes/admin/admin_api.php'));
+    }
+
+    /**
+     * Define the "admin" routes for the custom backpack setup.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapBackpackRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware('admin')
+            ->namespace($this->namespace.'\\Admin\\Backpack')
+            ->group(base_path('routes/admin/backpack.php'));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\ApiHelper;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -66,11 +67,7 @@ class Handler extends ExceptionHandler
         // MultiAuthUnAuthenticated
 
         if ($request->ajax() || $request->wantsJson()) {
-            return response()->json([
-                'info' => Response::$statusTexts[Response::HTTP_UNAUTHORIZED],
-                'status' => Response::$statusTexts[Response::HTTP_UNAUTHORIZED],
-                'status_code' => Response::HTTP_UNAUTHORIZED
-            ])->setStatusCode(Response::HTTP_UNAUTHORIZED, Response::$statusTexts[Response::HTTP_UNAUTHORIZED]);
+            return ApiHelper::sendResponse(Response::$statusTexts[Response::HTTP_UNAUTHORIZED], Response::HTTP_UNAUTHORIZED);
         }
 
         switch(array_get($exception->guards(), 0)) {
@@ -81,6 +78,9 @@ class Handler extends ExceptionHandler
             case 'admin':
                 $login_route = 'admin.login';
                 return redirect()->guest(route($login_route));
+                break;
+            case 'admin_api':
+                return ApiHelper::sendResponse(Response::$statusTexts[Response::HTTP_UNAUTHORIZED], Response::HTTP_UNAUTHORIZED);
                 break;
             case 'web':
                 $login_route = 'login';

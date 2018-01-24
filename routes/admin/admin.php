@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('admin.login');
 Route::post('login', 'Auth\LoginController@login')->name('admin.login');
 Route::post('logout', 'Auth\LoginController@logout')->name('admin.logout');
+Route::get('logout', 'Auth\LoginController@logout')->name('admin.logout');
 // Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('admin.register');
 Route::post('register', 'Auth\RegisterController@register')->name('admin.register');
@@ -30,9 +31,22 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('admin.password.reset');
 
 Route::get('/home', 'HomeController@index')->name('admin.home');
+Route::get('/dashboard', 'HomeController@index')->name('admin.dashboard');
 Route::get('/', 'HomeController@redirect')->name('admin.redirect');
 
 Route::get('edit-account-info', 'Auth\AdminAccountController@showAccountInfoForm')->name('admin.account.info');
 Route::post('edit-account-info', 'Auth\AdminAccountController@accountInfoForm')->name('admin.account.info');
 Route::get('change-password', 'Auth\AdminAccountController@showChangePasswordForm')->name('admin.account.password');
 Route::post('change-password', 'Auth\AdminAccountController@changePasswordForm')->name('admin.account.password');
+
+// Tests
+
+
+// Cruds
+Route::post('savemenuitem_save', 'SideMenuItemCrudController@saveMenuItem')->name('admin.save.menu.item');
+Route::post('sidemenusection_save', 'SideMenuSectionCrudController@saveSectionItem')->name('admin.save.section.item');
+
+CRUD::resource('sidemenusection', 'SideMenuSectionCrudController');
+CRUD::resource('sidemenuitem', 'SideMenuItemCrudController');
+
+

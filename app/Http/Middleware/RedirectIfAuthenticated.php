@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\ApiHelper;
 use Closure;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
@@ -33,6 +35,11 @@ class RedirectIfAuthenticated
                     return redirect(route('admin.home'));
                 }
             break;
+            case 'admin_api':
+                if (Auth::guard($guard)->check()) {
+                    return ApiHelper::sendResponse("Authenticated", Response::HTTP_ACCEPTED);
+                }
+                break;
             case 'web':
                 dd($guard);
                 if (Auth::guard($guard)->check()) {

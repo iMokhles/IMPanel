@@ -44,3 +44,6 @@ body {
 .logo-lg b {
 	font-weight: 400;
 }
+.login-page, .register-page {
+	background: #ecf0f5;
+}

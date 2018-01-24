@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/test_menu', function () {
+
+    return \App\Helpers\MenuHelper::disabledMenus();
+});
