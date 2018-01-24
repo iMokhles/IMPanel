@@ -1,8 +1,6 @@
 language: php
 
 php:
-  - 5.6
-  - 7.0
   - 7.1
   - nightly
 
@@ -10,6 +8,7 @@ matrix:
     allow_failures:
         - php: nightly
 
-sudo: false
-
-install: travis_retry composer install --no-interaction --prefer-source
+install:
+  - travis_retry composer install --no-interaction --prefer-source
+  - mv .env.travis .env
+  - php artisan key:generate
