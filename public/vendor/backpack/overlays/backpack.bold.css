@@ -44,6 +44,14 @@ body {
 .logo-lg b {
 	font-weight: 400;
 }
+
 .login-page, .register-page {
 	background: #ecf0f5;
+}
+
+.login-footer {
+	position: absolute;
+	text-align: center;
+	bottom: 5px;
+	width: 100%;
 }

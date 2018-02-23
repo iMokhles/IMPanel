@@ -10,9 +10,9 @@
     </div>
 
     <div class="panel-body clearfix">
-        <ul class='draggable-menu draggable-menu-inactive'>
+        <ul class='draggable-menu draggable-menu-inactive' id="sectionId_{{$sectionId}}">
             @foreach(\App\Helpers\MenuHelper::disabledMenus($crud->model) as $menu)
-                <li data-id='{{$menu->id}}' data-name='{{$menu->name}}'>
+                <li data-id='{{$menu->id}}' data-name='{{$menu->name}}' data-section="{{$sectionId}}">
                     <div>
                         {{$menu->name}}
                         <span class='pull-right'>
@@ -39,7 +39,7 @@
         </ul>
 
         @if(count(\App\Helpers\MenuHelper::disabledMenus($crud->model))==0)
-            <div align="center" id='inactive_text' class='text-muted'>Disabled item is empty</div>
+            <div align="center" id='inactive_text_sectionId_{{$sectionId}}' class='text-muted'>Disabled item is empty</div>
         @endif
     </div>
 </div>

@@ -10,9 +10,9 @@
     </div>
 
     <div class="panel-body clearfix">
-        <ul class='draggable-menu draggable-menu-inactive'>
-            @foreach(\App\Helpers\MenuHelper::disabledMenus($crud->model) as $menu)
-                <li data-id='{{$menu->id}}' data-name='{{$menu->name}}'>
+        <ul class='draggable-menu draggable-menu-inactive' id="sectionId_{{$sectionId}}">
+            @foreach($disabledMenus as $menu)
+                <li data-id='{{$menu->id}}' data-name='{{$menu->name}}' data-section="{{$sectionId}}">
                     <div>
                         <i class='fa {{$menu->icon}}'></i> {{$menu->name}}
                         <span class='pull-right'>
@@ -34,10 +34,10 @@
                             </small>
                         </em>
                     </div>
-                    <ul>
+                    <ul id="sectionId_{{$sectionId}}">
                         @if($menu->children)
                             @foreach($menu->children as $child)
-                                <li data-id='{{$child->id}}' data-name='{{$child->name}}'>
+                                <li data-id='{{$child->id}}' data-name='{{$child->name}}' data-section="{{$sectionId}}">
                                     <div>
                                         <i class='fa {{$child->icon}}'></i> {{$child->name}}
                                         <span class='pull-right'>
@@ -59,10 +59,10 @@
                                             </small>
                                         </em>
                                     </div>
-                                    <ul>
+                                    <ul id="sectionId_{{$sectionId}}">
                                         @if($child->children)
                                             @foreach($child->children as $subChild)
-                                                <li data-id='{{$subChild->id}}' data-name='{{$subChild->name}}'>
+                                                <li data-id='{{$subChild->id}}' data-name='{{$subChild->name}}' data-section="{{$sectionId}}">
                                                     <div>
                                                         <i class='fa {{$subChild->icon}}'></i> {{$subChild->name}}
                                                         <span class='pull-right'>
@@ -95,9 +95,8 @@
                 </li>
             @endforeach
         </ul>
-
-        @if(count(\App\Helpers\MenuHelper::disabledMenus($crud->model))==0)
-            <div align="center" id='inactive_text' class='text-muted'>Disabled item is empty</div>
+        @if(count($disabledMenus)==0)
+            <div align="center" id='inactive_text_sectionId_{{$sectionId}}' class='text-muted'>Disabled item is empty</div>
         @endif
     </div>
 </div>

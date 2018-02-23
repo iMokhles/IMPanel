@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <link rel="shortcut icon" href="{{asset('panel_assets')}}/img/favicon.png">
-<title>Sign In / Universe Admin</title>
+<title>@yield('page_title')</title>
 
 {{-- LINKS --}}
 <link rel="stylesheet" href="{{asset('panel_assets')}}/fonts/open-sans/style.min.css?v={{time()}}">

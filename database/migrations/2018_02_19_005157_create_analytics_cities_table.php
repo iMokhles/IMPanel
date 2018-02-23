@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFrontendNavbarTable extends Migration
+class CreateAnalyticsCitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateFrontendNavbarTable extends Migration
      */
     public function up()
     {
-        Schema::create('frontend_navbar', function (Blueprint $table) {
+        Schema::create('analytics_cities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('logo_big')->nullable();
-            $table->string('logo_small')->nullable();
+            $table->string('name')->nullable();
+            $table->integer('visits')->nullable();
+            $table->string('ip_addr', 50)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateFrontendNavbarTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('frontend_navbar');
+        Schema::dropIfExists('analytics_cities');
     }
 }

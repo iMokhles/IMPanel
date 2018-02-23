@@ -244,7 +244,11 @@ class SideMenuItemCrudController extends CrudController
     public function saveMenuItem(UpdateRequest $request) {
         $post = $request->input('menus');
         $isActive =  $request->input('isActive');
+        $section = $request->input('section');
+        $sectionId = preg_replace('/[^0-9]/', '', $section);
+
         $post = json_decode($post,true);
+
 
         $savedArray = [];
         $i = 1;
@@ -259,18 +263,21 @@ class SideMenuItemCrudController extends CrudController
                         $subCi = 1;
                         foreach($c['children'][0] as $subC) {
                             $id = $subC['id'];
-                            SideMenuItem::where('id',$id)->update(['sort'=>$subCi,'parent_id'=>$cpid,'is_active'=>$isActive]);
+                            SideMenuItem::where('id',$id)->update(['sort'=>$subCi,'parent_id'=>$cpid,'is_active'=>$isActive,
+                                'section_id' => $sectionId]);
                             $subCi++;
                         }
                     }
                     $id = $c['id'];
-                    SideMenuItem::where('id',$id)->update(['sort'=>$ci,'parent_id'=>$pid,'is_active'=>$isActive]);
+                    SideMenuItem::where('id',$id)->update(['sort'=>$ci,'parent_id'=>$pid,'is_active'=>$isActive,
+                        'section_id' => $sectionId]);
                     $ci++;
                 }
             }
             array_push($savedArray, $ro);
 
-            SideMenuItem::where('id',$pid)->update(['sort'=>$i,'parent_id'=>0,'is_active'=>$isActive]);
+            SideMenuItem::where('id',$pid)->update(['sort'=>$i,'parent_id'=>0,'is_active'=>$isActive,
+                'section_id' => $sectionId]);
             $i++;
         }
         return response()->json(['success'=>true, 'list' => $savedArray]);

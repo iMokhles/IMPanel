@@ -191,25 +191,38 @@
                 },
                 onDrop: function ($item, container, _super) {
 
+                    var sectionId = '';
+                    var isActive = 0;
+                    var data = '';
+                    var jsonString = '';
                     if ($item.parents('ul').hasClass('draggable-menu-active')) {
-                        var isActive = 1;
-                        var data = $('.draggable-menu-active').sortable("serialize").get();
-                        var jsonString = JSON.stringify(data, null, ' ');
+                        sectionId = $item.parents('ul').attr('id');
+                        isActive = 1;
+                        data = $('#'+sectionId).sortable("serialize").get();
+                        jsonString = JSON.stringify(data, null, ' ');
+                        $('#empty_active_text_'+sectionId).remove();
+
                     } else {
-                        var isActive = 0;
-                        var data = $('.draggable-menu-inactive').sortable("serialize").get();
-                        var jsonString = JSON.stringify(data, null, ' ');
-                        $('#inactive_text').remove();
+                        sectionId = $item.parents('ul').attr('id');
+                        isActive = 0;
+                        data = $('#'+sectionId).sortable("serialize").get();
+                        jsonString = JSON.stringify(data, null, ' ');
+                        $('#inactive_text_'+sectionId).remove();
                     }
 
-                    $.post("@if($crud->model instanceof \App\Models\SideMenuItem) {{route('admin.save.menu.item')}} @else {{route('admin.save.section.item')}} @endif", {
+                    sectionId = $item.parents('ul').attr('id');
+
+                    $.post("@if($crud->model instanceof \App\Models\SideMenuItem) {{route('admin.save.menu.item')}} @elseif($crud->model instanceof \App\Models\SideMenuSection) {{route('admin.save.section.item')}} @elseif($crud->model instanceof \App\Models\NavbarBtn) {{route('admin.save.navbar.btn')}} @elseif($crud->model instanceof \App\Models\FooterBtn) {{route('admin.save.footer.btn')}} @endif", {
                         menus: jsonString,
-                        isActive: isActive
+                        isActive: isActive,
+                        section: sectionId
                     }, function (resp) {
-                        $('#menu-saved-info').fadeIn('fast').delay(1000).fadeOut('fast');
+                        $('#menu-saved-info_'+sectionId).fadeIn('fast').delay(1000).fadeOut('fast');
                     });
 
+
                     _super($item, container);
+
                 }
             });
 

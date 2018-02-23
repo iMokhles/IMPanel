@@ -21,19 +21,19 @@ class SidemenuSectionsTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'name' => 'Administrations',
-                'sort' => 2,
+                'sort' => 3,
                 'is_active' => 1,
                 'created_at' => '2018-01-21 22:52:46',
-                'updated_at' => '2018-01-23 17:51:23',
+                'updated_at' => '2018-02-18 21:40:00',
             ),
             1 => 
             array (
                 'id' => 2,
-                'name' => 'Advanced',
-                'sort' => 3,
+                'name' => 'FrontEnd',
+                'sort' => 2,
                 'is_active' => 1,
                 'created_at' => '2018-01-23 14:59:09',
-                'updated_at' => '2018-01-23 17:51:23',
+                'updated_at' => '2018-02-18 21:40:00',
             ),
             2 => 
             array (
@@ -42,7 +42,7 @@ class SidemenuSectionsTableSeeder extends Seeder
                 'sort' => 1,
                 'is_active' => 1,
                 'created_at' => '2018-01-23 15:16:58',
-                'updated_at' => '2018-01-23 17:51:23',
+                'updated_at' => '2018-02-18 21:40:00',
             ),
         ));
         

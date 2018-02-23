@@ -7,15 +7,15 @@
 <div class="panel panel-success">
     <div class="panel-heading">
         <strong>Active Items</strong>
-        <span id='menu-saved-info' style="display:none" class='pull-right text-success'>
+        <span id='menu-saved-info_sectionId_{{$sectionId}}' style="display:none" class='pull-right text-success'>
                             <i class='fa fa-check'></i> Item Saved
                         </span>
     </div>
 
     <div class="panel-body clearfix">
-        <ul class='draggable-menu draggable-menu-active'>
+        <ul class='draggable-menu draggable-menu-active' id="sectionId_{{$sectionId}}">
             @foreach(\App\Helpers\MenuHelper::activeMenus($crud->model) as $menu)
-                <li data-id='{{$menu->id}}' data-name='{{$menu->name}}'>
+                <li data-id='{{$menu->id}}' data-name='{{$menu->name}}' data-section="{{$sectionId}}">
                     <div>
                         {{$menu->name}}
                         <span class='pull-right'>
@@ -43,7 +43,7 @@
         </ul>
 
         @if(count(\App\Helpers\MenuHelper::activeMenus($crud->model))==0)
-            <div align="center" id="empty_active_text">Active items is empty, please add new item</div>
+            <div align="center" id="empty_active_text_sectionId_{{$sectionId}}">Active items is empty, please add new item</div>
         @endif
     </div>
 

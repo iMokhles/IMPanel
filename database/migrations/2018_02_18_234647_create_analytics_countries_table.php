@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFrontendNavbarLinksTable extends Migration
+class CreateAnalyticsCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateFrontendNavbarLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('frontend_navbar_links', function (Blueprint $table) {
+        Schema::create('analytics_countries', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title')->nullable();
-            $table->string('href')->nullable();
+            $table->string('iso')->nullable();
+            $table->string('name')->nullable();
+            $table->integer('visits')->nullable();
+            $table->string('ip_addr', 50)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateFrontendNavbarLinksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('frontend_navbar_links');
+        Schema::dropIfExists('analytics_countries');
     }
 }

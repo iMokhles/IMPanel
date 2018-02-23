@@ -27,8 +27,8 @@
 
         <div class="box-body">
             <div class="col-sm-4">
-                @include('admin.pages.section_manager.inc.active_items')
-                @include('admin.pages.section_manager.inc.disabled_items')
+                @include('admin.pages.section_manager.inc.active_items', ['sectionId' => "1_active"])
+                @include('admin.pages.section_manager.inc.disabled_items', ['sectionId' => "1_inactive"])
             </div>
 
             <div class="col-sm-8">

@@ -16,6 +16,93 @@ use Illuminate\Http\Response;
 
 class MenuHelper
 {
+    public static function menuActiveForSection($sectionId) {
+
+        $section = SideMenuSection::where('id', $sectionId)->orderby('sort', 'asc')->first();
+        $sectionMenus = $section->items()->where('parent_id', 0)->where('is_active', 1)->orderby('sort', 'asc')->get();
+
+        $activeMenus = $sectionMenus;
+        foreach ($activeMenus as $menu) {
+            $childs = SideMenuItem::where('is_active', 1)
+                ->where('parent_id', $menu->id)
+                ->orderby('sort', 'asc')->get();
+
+            if (count($childs) > 0) {
+                $childsArray = [];
+                foreach ($childs as $child) {
+                    if ($child->id != $menu->id) {
+
+                        // get sub child
+                        $subChilds = \App\Models\SideMenuItem::where('is_active', 1)
+                            ->where('parent_id', $child->id)
+                            ->orderby('sort', 'asc')->get();
+                        if (count($subChilds) > 0) {
+                            $subChildsArray = [];
+                            foreach ($subChilds as $subChild) {
+
+                                if ($subChild->id != $child->id) {
+                                    array_push($subChildsArray, $subChild);
+                                }
+                            }
+                            if (count($subChildsArray) > 0) {
+                                $child->children = $subChildsArray;
+                            }
+                        }
+                        array_push($childsArray, $child);
+                    }
+                }
+                if (count($childsArray) > 0) {
+                    $menu->children = $childsArray;
+                }
+            }
+        }
+        return $activeMenus;
+    }
+
+    public static function menuDisabledForSection($sectionId) {
+
+        $section = SideMenuSection::where('id', $sectionId)->orderby('sort', 'asc')->first();
+        $sectionMenus = $section->items()->where('parent_id', 0)->where('is_active', 0)->orderby('sort', 'asc')->get();
+        $disabledMenus = $sectionMenus;
+
+        foreach ($disabledMenus as $menu) {
+            $childs = SideMenuItem::where('is_active', 0)
+                ->where('parent_id', $menu->id)
+                ->orderby('sort', 'asc')->get();
+
+            if (count($childs) > 0) {
+                $childsArray = [];
+                foreach ($childs as $child) {
+                    if ($child->id != $menu->id) {
+
+                        // get sub child
+                        $subChilds = \App\Models\SideMenuItem::where('is_active', 0)
+                            ->where('parent_id', $child->id)
+                            ->orderby('sort', 'asc')->get();
+                        if (count($subChilds) > 0) {
+                            $subChildsArray = [];
+                            foreach ($subChilds as $subChild) {
+
+                                if ($subChild->id != $child->id) {
+                                    array_push($subChildsArray, $subChild);
+                                }
+                            }
+                            if (count($subChildsArray) > 0) {
+                                $child->children = $subChildsArray;
+                            }
+                        }
+                        array_push($childsArray, $child);
+                    }
+                }
+                if (count($childsArray) > 0) {
+                    $menu->children = $childsArray;
+                }
+            }
+        }
+
+        return $disabledMenus;
+    }
+
     private static function menuActive() {
         $activeMenus = SideMenuItem::where('parent_id', 0)->where('is_active', 1)->orderby('sort', 'asc')->get();
         foreach ($activeMenus as $menu) {
@@ -53,14 +140,6 @@ class MenuHelper
             }
         }
         return $activeMenus;
-    }
-    public static function activeSection() {
-        $activeSections = SideMenuSection::where('is_active', 1)->orderby('sort', 'asc')->get();
-        return $activeSections;
-    }
-    public static function disabledSection() {
-        $activeSections = SideMenuSection::where('is_active', 0)->orderby('sort', 'asc')->get();
-        return $activeSections;
     }
     public static function menuDisabled() {
         $disabledMenus = SideMenuItem::where('parent_id', 0)->where('is_active', 0)->orderby('sort', 'asc')->get();
@@ -101,6 +180,18 @@ class MenuHelper
         }
 
         return $disabledMenus;
+    }
+    public static function activeSection() {
+        $activeSections = SideMenuSection::where('is_active', 1)->orderby('sort', 'asc')->get();
+        return $activeSections;
+    }
+    public static function disabledSection() {
+        $activeSections = SideMenuSection::where('is_active', 0)->orderby('sort', 'asc')->get();
+        return $activeSections;
+    }
+    public static function allSections() {
+        $allSections = SideMenuSection::orderby('sort', 'asc')->get();
+        return $allSections;
     }
 
     public static function disabledMenus($model) {

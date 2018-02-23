@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFrontendNavbarRoundedBtnsTable extends Migration
+class CreateAnalyticsReferrerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateFrontendNavbarRoundedBtnsTable extends Migration
      */
     public function up()
     {
-        Schema::create('frontend_navbar_rounded_btns', function (Blueprint $table) {
+        Schema::create('analytics_referrer', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title')->nullable();
-            $table->string('href')->nullable();
+            $table->string('name')->nullable();
+            $table->integer('visits')->nullable();
+            $table->string('ip_addr', 50)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateFrontendNavbarRoundedBtnsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('frontend_navbar_rounded_btns');
+        Schema::dropIfExists('analytics_referrer');
     }
 }

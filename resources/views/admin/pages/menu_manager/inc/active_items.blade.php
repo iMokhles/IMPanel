@@ -7,15 +7,15 @@
 <div class="panel panel-success">
     <div class="panel-heading">
         <strong>Active Items</strong>
-        <span id='menu-saved-info' style="display:none" class='pull-right text-success'>
+        <span id='menu-saved-info_sectionId_{{$sectionId}}' style="display:none" class='pull-right text-success'>
                             <i class='fa fa-check'></i> Item Saved
                         </span>
     </div>
 
     <div class="panel-body clearfix">
-        <ul class='draggable-menu draggable-menu-active'>
-            @foreach(\App\Helpers\MenuHelper::activeMenus($crud->model) as $menu)
-                <li data-id='{{$menu->id}}' data-name='{{$menu->name}}'>
+        <ul class='draggable-menu draggable-menu-active' id="sectionId_{{$sectionId}}">
+            @foreach($activeMenus as $menu)
+                <li data-id='{{$menu->id}}' data-name='{{$menu->name}}' data-section="{{$sectionId}}">
                     <div>
                         <i class='fa {{$menu->icon}}'></i> {{$menu->name}}
                         <span class='pull-right'>
@@ -40,14 +40,14 @@
                         <em class="text-muted">
                             <small>
                                 <i class="fa fa-list"></i>
-                                &nbsp; {{\App\Models\SideMenuSection::find($menu->section_id)->name}}
+                                &nbsp; {{$menu->section()->first()->name}}
                             </small>
                         </em>
                     </div>
-                    <ul>
+                    <ul id="sectionId_{{$sectionId}}">
                         @if($menu->children)
                             @foreach($menu->children as $child)
-                                <li data-id='{{$child->id}}' data-name='{{$child->name}}'>
+                                <li data-id='{{$child->id}}' data-name='{{$child->name}}' data-section="{{$sectionId}}">
                                     <div>
                                         <i class='fa {{$child->icon}}'></i> {{$child->name}}
                                         <span class='pull-right'>
@@ -69,10 +69,10 @@
                                             </small>
                                         </em>
                                     </div>
-                                    <ul>
+                                    <ul id="sectionId_{{$sectionId}}">
                                         @if($child->children)
                                             @foreach($child->children as $subChild)
-                                                <li data-id='{{$subChild->id}}' data-name='{{$subChild->name}}'>
+                                                <li data-id='{{$subChild->id}}' data-name='{{$subChild->name}}' data-section="{{$sectionId}}">
                                                     <div>
                                                         <i class='fa {{$subChild->icon}}'></i> {{$subChild->name}}
                                                         <span class='pull-right'>
@@ -106,8 +106,8 @@
             @endforeach
         </ul>
 
-        @if(count(\App\Helpers\MenuHelper::activeMenus($crud->model))==0)
-            <div align="center" id="empty_active_text">Active items is empty, please add new item</div>
+        @if(count($activeMenus)==0)
+            <div align="center" id="empty_active_text_sectionId_{{$sectionId}}">Active items is empty, please add new item</div>
         @endif
     </div>
 

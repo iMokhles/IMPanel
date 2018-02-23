@@ -7,30 +7,11 @@
 
 <footer class="p-front__footer">
     <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">About Us</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Support</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Press</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Api</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Jobs</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Privacy</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Terms</a>
-        </li>
+        @foreach(\App\Helpers\FooterHelper::getFooterBtns() as $barBtn)
+            <li class="nav-item active">
+                <a class="nav-link active {{ (\Request::is($barBtn->path))?"active":""}}" href="{{url($barBtn->path)}}">{{$barBtn->name}}</a>
+            </li>
+        @endforeach
     </ul>
-    <span>2017 &copy; UniverseAdmin</span>
+    <span>{{Config::get('settings.site_footer')}}</span>
 </footer>

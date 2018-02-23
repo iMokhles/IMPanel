@@ -26,12 +26,7 @@
         </div>
 
         <div class="box-body">
-            <div class="col-sm-4">
-                @include('admin.pages.menu_manager.inc.active_items')
-                @include('admin.pages.menu_manager.inc.disabled_items')
-            </div>
-
-            <div class="col-sm-8">
+            <div class="col-sm-12">
                 <div class="panel panel-default">
 
                     <div class="panel-heading"> Add Menu</div>
@@ -50,4 +45,31 @@
       </div><!-- /.box -->
     </div>
   </div>
+
+
+
+<div class="row">
+    <!-- THE ACTUAL CONTENT -->
+
+    @foreach(\App\Helpers\MenuHelper::allSections() as $section)
+        <div class="col-md-4">
+            <div class="box">
+                <div class="box-header {{ $crud->hasAccess('create')?'with-border':'' }}">
+                    <h3 class="box-title">{{$section->name}}</h3>
+                </div>
+
+                <div class="box-body">
+                    <div>
+                        @include('admin.pages.menu_manager.inc.active_items',
+                        ['activeMenus' => \App\Helpers\MenuHelper::menuActiveForSection($section->id),
+                        'sectionId' => $section->id."_active"])
+                        @include('admin.pages.menu_manager.inc.disabled_items',
+                        ['disabledMenus' => \App\Helpers\MenuHelper::menuDisabledForSection($section->id),
+                        'sectionId' => $section->id."_inactive"])
+                    </div>
+                </div>
+            </div><!-- /.box -->
+        </div>
+    @endforeach
+</div>
 @endsection

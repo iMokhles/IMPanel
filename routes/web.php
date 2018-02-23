@@ -11,6 +11,12 @@
 |
 */
 
+Route::get('/error/{errorCode}', function ($errorCode) {
+    return view('errors.error', [
+        'error_code' => $errorCode
+    ]);
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,5 +24,21 @@ Route::get('/', function () {
 
 Route::get('/test_menu', function () {
 
-    return \App\Helpers\MenuHelper::disabledMenus();
+    return \App\Helpers\TRKHelper::getBrowsersStatics();
 });
+
+Route::get('/features', function () {
+
+    return view('welcome');
+});
+
+Route::get('/about', function () {
+
+    return view('welcome');
+});
+
+Route::get('/support', function () {
+
+    return view('welcome');
+});
+

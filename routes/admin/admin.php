@@ -39,7 +39,16 @@ Route::post('edit-account-info', 'Auth\AdminAccountController@accountInfoForm')-
 Route::get('change-password', 'Auth\AdminAccountController@showChangePasswordForm')->name('admin.account.password');
 Route::post('change-password', 'Auth\AdminAccountController@changePasswordForm')->name('admin.account.password');
 
-// Tests
+// Analytics
+Route::get('analytics', 'AdminAnalyticsController@index')->name('admin.analytics.index');
+Route::get('analytics/countries', 'AdminAnalyticsController@index')->name('admin.analytics.countries');
+Route::get('analytics/browsers', 'AdminAnalyticsController@index')->name('admin.analytics.browsers');
+Route::get('analytics/cities', 'AdminAnalyticsController@index')->name('admin.analytics.cities');
+Route::get('analytics/os', 'AdminAnalyticsController@index')->name('admin.analytics.os');
+Route::get('analytics/referrer', 'AdminAnalyticsController@index')->name('admin.analytics.referrer');
+Route::get('analytics/urls', 'AdminAnalyticsController@index')->name('admin.analytics.urls');
+Route::get('analytics/visitors', 'AdminAnalyticsController@index')->name('admin.analytics.visitors');
+
 
 
 // Cruds
@@ -49,4 +58,8 @@ Route::post('sidemenusection_save', 'SideMenuSectionCrudController@saveSectionIt
 CRUD::resource('sidemenusection', 'SideMenuSectionCrudController');
 CRUD::resource('sidemenuitem', 'SideMenuItemCrudController');
 
+Route::post('navbarbtn_save', 'NavbarBtnCrudController@saveNavBarBtn')->name('admin.save.navbar.btn');
+CRUD::resource('navbarbtn', 'NavbarBtnCrudController');
 
+Route::post('footerbtn_save', 'FooterBtnCrudController@saveFooterBtn')->name('admin.save.footer.btn');
+CRUD::resource('footerbtn', 'FooterBtnCrudController');

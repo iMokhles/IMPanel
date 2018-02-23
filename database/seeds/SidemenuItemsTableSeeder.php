@@ -25,23 +25,23 @@ class SidemenuItemsTableSeeder extends Seeder
                 'name' => 'File manager',
                 'path' => '/admin/filemanager',
                 'icon' => 'fa-files-o',
-                'sort' => 3,
+                'sort' => 2,
                 'is_active' => 1,
                 'created_at' => '2018-01-22 10:30:28',
-                'updated_at' => '2018-01-23 17:54:40',
+                'updated_at' => '2018-02-18 21:01:37',
             ),
             1 => 
             array (
                 'id' => 2,
-                'section_id' => 2,
+                'section_id' => 1,
                 'parent_id' => 0,
                 'name' => 'Translate',
                 'path' => NULL,
                 'icon' => 'fa-globe',
-                'sort' => 4,
+                'sort' => 3,
                 'is_active' => 1,
                 'created_at' => '2018-01-23 14:59:58',
-                'updated_at' => '2018-01-23 17:54:40',
+                'updated_at' => '2018-02-18 21:01:37',
             ),
             2 => 
             array (
@@ -54,7 +54,7 @@ class SidemenuItemsTableSeeder extends Seeder
                 'sort' => 1,
                 'is_active' => 1,
                 'created_at' => '2018-01-23 15:02:45',
-                'updated_at' => '2018-01-23 17:54:40',
+                'updated_at' => '2018-02-18 21:01:37',
             ),
             3 => 
             array (
@@ -67,7 +67,7 @@ class SidemenuItemsTableSeeder extends Seeder
                 'sort' => 2,
                 'is_active' => 1,
                 'created_at' => '2018-01-23 15:03:31',
-                'updated_at' => '2018-01-23 17:54:40',
+                'updated_at' => '2018-02-18 21:01:37',
             ),
             4 => 
             array (
@@ -80,7 +80,7 @@ class SidemenuItemsTableSeeder extends Seeder
                 'sort' => 1,
                 'is_active' => 1,
                 'created_at' => '2018-01-23 15:17:24',
-                'updated_at' => '2018-01-23 17:54:40',
+                'updated_at' => '2018-02-18 21:45:44',
             ),
             5 => 
             array (
@@ -90,10 +90,10 @@ class SidemenuItemsTableSeeder extends Seeder
                 'name' => 'MenuManager',
                 'path' => NULL,
                 'icon' => 'fa-list-alt',
-                'sort' => 2,
+                'sort' => 1,
                 'is_active' => 1,
                 'created_at' => '2018-01-23 17:53:09',
-                'updated_at' => '2018-01-23 17:54:40',
+                'updated_at' => '2018-02-18 21:01:37',
             ),
             6 => 
             array (
@@ -106,7 +106,7 @@ class SidemenuItemsTableSeeder extends Seeder
                 'sort' => 1,
                 'is_active' => 1,
                 'created_at' => '2018-01-23 17:53:59',
-                'updated_at' => '2018-01-23 17:54:40',
+                'updated_at' => '2018-02-18 21:01:37',
             ),
             7 => 
             array (
@@ -119,7 +119,46 @@ class SidemenuItemsTableSeeder extends Seeder
                 'sort' => 2,
                 'is_active' => 1,
                 'created_at' => '2018-01-23 17:54:34',
-                'updated_at' => '2018-01-23 17:54:40',
+                'updated_at' => '2018-02-18 21:01:37',
+            ),
+            8 => 
+            array (
+                'id' => 9,
+                'section_id' => 2,
+                'parent_id' => 0,
+                'name' => 'NavBarBtns',
+                'path' => 'admin/navbarbtn',
+                'icon' => 'fa-th-list',
+                'sort' => 1,
+                'is_active' => 1,
+                'created_at' => '2018-01-23 17:54:34',
+                'updated_at' => '2018-02-18 21:40:19',
+            ),
+            9 => 
+            array (
+                'id' => 10,
+                'section_id' => 2,
+                'parent_id' => 0,
+                'name' => 'FooterBtns',
+                'path' => 'admin/footerbtn',
+                'icon' => 'fa-th-list',
+                'sort' => 2,
+                'is_active' => 1,
+                'created_at' => '2018-02-18 18:03:21',
+                'updated_at' => '2018-02-18 21:40:19',
+            ),
+            10 => 
+            array (
+                'id' => 11,
+                'section_id' => 1,
+                'parent_id' => 0,
+                'name' => 'Analytics',
+                'path' => 'admin/analytics',
+                'icon' => 'fa-pie-chart',
+                'sort' => NULL,
+                'is_active' => 1,
+                'created_at' => '2018-02-18 23:52:59',
+                'updated_at' => '2018-02-18 23:52:59',
             ),
         ));
         
