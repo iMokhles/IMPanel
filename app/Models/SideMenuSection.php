@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\CrudHelper;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
@@ -22,7 +23,8 @@ class SideMenuSection extends Model
     protected $fillable = [
         'role_id',
         'name',
-        'sort'
+        'sort',
+        'is_active'
     ];
     protected $hidden = [];
     protected $dates = ['created_at', 'updated_at'];
@@ -32,6 +34,9 @@ class SideMenuSection extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function getActiveStatus() {
+        return CrudHelper::getBooleanBadge($this->id, $this->table, 'is_active');
+    }
 
     /*
     |--------------------------------------------------------------------------

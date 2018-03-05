@@ -4,8 +4,6 @@
         <!-- ========== Top menu items (ordered left) ========== -->
         <!-- =================================================== -->
 
-    <!-- <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> <span>Home</span></a></li> -->
-
         <!-- ========== End of top menu left items ========== -->
     </ul>
 </div>
@@ -17,12 +15,14 @@
         <!-- ========== Top menu right items (ordered left) ========== -->
         <!-- ========================================================= -->
 
-    <!-- <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> <span>Home</span></a></li> -->
-{{--        @if (config('backpack.base.setup_auth_routes'))--}}
-            @if (Auth::guard('admin')->check())
-                <li><a href="{{ route('admin.logout') }}"><i class="fa fa-btn fa-sign-out"></i> {{ trans('backpack::base.logout') }}</a></li>
-            @endif
-    {{--@endif--}}
+        {{-- Notifications Menu --}}
+        @include('backpack::inc.notifications_menu')
+
+        @if (Auth::guard('admin')->check())
+            <li>
+                <a href="{{ route('admin.logout') }}"><i class="fa fa-btn fa-sign-out"></i> {{ trans('backpack::base.logout') }}</a>
+            </li>
+        @endif
     <!-- ========== End of top menu right items ========== -->
     </ul>
 </div>

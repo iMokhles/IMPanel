@@ -31,8 +31,8 @@ class SideMenuSectionCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        $this->crud->setListView('admin.pages.section_manager.create');
-        $this->crud->setCreateView('admin.pages.section_manager.create');
+        $this->crud->setListView('admin.pages.side_section_manager.create');
+        $this->crud->setCreateView('admin.pages.side_section_manager.create');
 
         $this->crud->enableAjaxTable();
 

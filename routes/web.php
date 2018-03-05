@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Route::get('/test_menu', function () {
 
-    return \App\Helpers\TRKHelper::getBrowsersStatics();
+    return \App\Helpers\StatisticHelper::getSideMenu();
 });
 
 Route::get('/features', function () {

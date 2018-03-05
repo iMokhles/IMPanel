@@ -19,10 +19,16 @@ class CreateSidemenuItemsTable extends Migration
             $table->integer('parent_id')->default(0)->unsigned();
 
             $table->string('name')->nullable();
+            $table->enum('type', ['url', 'page'])->default('url');
             $table->string('path')->nullable();
             $table->string('icon', 255)->nullable();
             $table->integer('sort')->nullable();
             $table->boolean('is_active')->default(true);
+
+            $table->foreign('section_id')
+                ->references('id')
+                ->on('sidemenu_sections')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

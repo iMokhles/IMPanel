@@ -1,6 +1,7 @@
 <?php
 
 return [
-    "analytics" => "إحصائيات",
+    "analytics" => "تحليلات",
     "table" => "جدول",
+    "statistics" => "إحصائيات",
 ];

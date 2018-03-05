@@ -6,11 +6,13 @@ use App\Helpers\AdminHelper;
 use App\Models\Role;
 use App\Models\SideMenuItem;
 use App\Models\SideMenuSection;
+use App\Models\StatisticsPage;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\SideMenuItemRequest as StoreRequest;
 use App\Http\Requests\SideMenuItemRequest as UpdateRequest;
+use Backpack\CRUD\app\Http\Requests\CrudRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -36,8 +38,8 @@ class SideMenuItemCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        $this->crud->setListView('admin.pages.menu_manager.create');
-        $this->crud->setCreateView('admin.pages.menu_manager.create');
+        $this->crud->setListView('admin.pages.side_menu_manager.create');
+        $this->crud->setCreateView('admin.pages.side_menu_manager.create');
 
 
         $this->crud->enableAjaxTable();
@@ -63,20 +65,16 @@ class SideMenuItemCrudController extends CrudController
                  'type' => "select",
              ],
              [
+                 'name' => "type",
+                 'label' => "Type",
+                 'view' => "admin/pages/crud/side_item_type",
+                 'page_model' => StatisticsPage::class,
+                 'type' => 'view',
+             ],
+             [
                  'name' => "name",
                  'label' => "Name",
                  'type' => "text",
-             ],
-             [
-                 // 1-n relationship
-                 'label' => "Path", // Table column heading
-                 'type' => 'view',
-                 'name' => 'path',
-                 'attribute' => 'path',
-                 'view' => "admin/pages/crud/select2_from_ajax_without_model",
-                 'data_source' => backpack_url("api/routes?api_token=".AdminHelper::apiToken()), // url to controller search function (with /{id} should return model)
-                 'placeholder' => "Select a route", // placeholder for the select
-                 'minimum_input_length' => 2, // minimum characters to type before querying results
              ]
 //             [
 //                 'name' => "path",
@@ -216,11 +214,7 @@ class SideMenuItemCrudController extends CrudController
 
     public function store(StoreRequest $request)
     {
-
-//        if ($request->input('section_id')) {
-//            $section = SideMenuSection::find($request->input('section_id'));
-//            $request->request->set('role_id', $section->role_id);
-//        }
+        $this->handlePageSlug($request);
         // your additional operations before save here
         $redirect_location = parent::storeCrud($request);
         // your additional operations after save here
@@ -230,15 +224,20 @@ class SideMenuItemCrudController extends CrudController
 
     public function update(UpdateRequest $request)
     {
-//        if ($request->input('section_id')) {
-//            $section = SideMenuSection::find($request->input('section_id'));
-//            $request->request->set('role_id', $section->role_id);
-//        }
+        $this->handlePageSlug($request);
         // your additional operations before save here
         $redirect_location = parent::updateCrud($request);
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
+    }
+
+    protected function handlePageSlug(CrudRequest $request) {
+//        page_slug
+        if ($request->has('page_slug')) {
+            $statistics = "admin/statistics/show/".$request["page_slug"];
+            $request->request->set('path', $statistics);
+        }
     }
 
     public function saveMenuItem(UpdateRequest $request) {

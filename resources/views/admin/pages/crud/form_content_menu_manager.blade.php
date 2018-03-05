@@ -212,7 +212,18 @@
 
                     sectionId = $item.parents('ul').attr('id');
 
-                    $.post("@if($crud->model instanceof \App\Models\SideMenuItem) {{route('admin.save.menu.item')}} @elseif($crud->model instanceof \App\Models\SideMenuSection) {{route('admin.save.section.item')}} @elseif($crud->model instanceof \App\Models\NavbarBtn) {{route('admin.save.navbar.btn')}} @elseif($crud->model instanceof \App\Models\FooterBtn) {{route('admin.save.footer.btn')}} @endif", {
+                    $.post("@if($crud->model instanceof \App\Models\SideMenuItem) \
+                            {{route('admin.save.menu.item')}} \
+                            @elseif($crud->model instanceof \App\Models\SideMenuSection) \
+                            {{route('admin.save.section.item')}} \
+                            @elseif($crud->model instanceof \App\Models\NavbarBtn) \
+                            {{route('admin.save.navbar.btn')}} \
+                            @elseif($crud->model instanceof \App\Models\FooterBtn) \
+                            {{route('admin.save.footer.btn')}} \
+                            @elseif($crud->model instanceof \App\Models\StatisticsSection) \
+                            {{route('admin.save.statistic.widget.section')}} \
+                            @elseif($crud->model instanceof \App\Models\StatisticsWidget) \
+                            {{route('admin.save.statistic.widget')}} @endif", {
                         menus: jsonString,
                         isActive: isActive,
                         section: sectionId

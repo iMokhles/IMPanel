@@ -63,3 +63,17 @@ CRUD::resource('navbarbtn', 'NavbarBtnCrudController');
 
 Route::post('footerbtn_save', 'FooterBtnCrudController@saveFooterBtn')->name('admin.save.footer.btn');
 CRUD::resource('footerbtn', 'FooterBtnCrudController');
+
+
+CRUD::resource('statisticspage', 'StatisticsPageCrudController');
+
+Route::post('statisticssection_save', 'StatisticsSectionCrudController@saveWidgetSectionItem')->name('admin.save.statistic.widget.section');
+CRUD::resource('statisticssection', 'StatisticsSectionCrudController');
+
+Route::post('statisticswidget_save', 'StatisticsWidgetCrudController@saveWidgetItem')->name('admin.save.statistic.widget');
+CRUD::resource('statisticswidget', 'StatisticsWidgetCrudController');
+
+Route::get('statistics/show/{page_slug}', 'AdminStatisticsController@show')->name('admin.show.statistic.page');
+
+//Route::resource('statistics', 'AdminStatisticsController');
+

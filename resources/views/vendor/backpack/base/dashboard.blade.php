@@ -1,9 +1,5 @@
 @extends('backpack::layout')
 
-@section('body_attributes')
-    {{ config('backpack.base.skin') }} sidebar-mini
-@endsection
-
 @section('header')
     <section class="content-header">
         <h1>

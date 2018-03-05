@@ -3,8 +3,8 @@
 @section('header')
 	<section class="content-header">
 	  <h1>
-	    <span class="text-capitalize">SectionManager</span>
-	    <small>{{ trans('backpack::crud.all') }} <span class="text-lowercase">Sections</span> {{ trans('backpack::crud.in_the_database') }}.</small>
+	    <span class="text-capitalize">WidgetsManager</span>
+	    <small>{{ trans('backpack::crud.all') }} <span class="text-lowercase">Items</span> {{ trans('backpack::crud.in_the_database') }}.</small>
 	  </h1>
 	  <ol class="breadcrumb">
 	    <li><a href="{{ url(config('backpack.base.route_prefix'), 'dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
@@ -22,19 +22,14 @@
     <div class="col-md-12">
       <div class="box">
         <div class="box-header {{ $crud->hasAccess('create')?'with-border':'' }}">
-            <h3 class="box-title">Section Manager</h3>
+            <h3 class="box-title">Widgets Manager</h3>
         </div>
 
         <div class="box-body">
-            <div class="col-sm-4">
-                @include('admin.pages.section_manager.inc.active_items', ['sectionId' => "1_active"])
-                @include('admin.pages.section_manager.inc.disabled_items', ['sectionId' => "1_inactive"])
-            </div>
-
-            <div class="col-sm-8">
+            <div class="col-sm-12">
                 <div class="panel panel-default">
 
-                    <div class="panel-heading"> Add Section</div>
+                    <div class="panel-heading"> Add Widget</div>
 
                     <div class="panel-body">
                         {!! Form::open(array('url' => $crud->route, 'method' => 'post', 'files'=>$crud->hasUploadFields('create'))) !!}
@@ -50,4 +45,31 @@
       </div><!-- /.box -->
     </div>
   </div>
+
+
+
+<div class="row">
+    <!-- THE ACTUAL CONTENT -->
+
+    @foreach(\App\Helpers\StatisticHelper::allSections() as $section)
+        <div class="col-md-4">
+            <div class="box">
+                <div class="box-header {{ $crud->hasAccess('create')?'with-border':'' }}">
+                    <h3 class="box-title">{{$section->name}}</h3>
+                </div>
+
+                <div class="box-body">
+                    <div>
+                        @include('admin.statistics_manager.widgets.inc.active_items',
+                        ['activeMenus' => \App\Helpers\StatisticHelper::menuActiveForSection($section->id),
+                        'sectionId' => $section->id."_active"])
+                        @include('admin.statistics_manager.widgets.inc.disabled_items',
+                        ['disabledMenus' => \App\Helpers\StatisticHelper::menuDisabledForSection($section->id),
+                        'sectionId' => $section->id."_inactive"])
+                    </div>
+                </div>
+            </div><!-- /.box -->
+        </div>
+    @endforeach
+</div>
 @endsection

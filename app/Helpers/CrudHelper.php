@@ -36,6 +36,19 @@ class CrudHelper
         }
         return $html;
     }
+    public static function getIconBadgeFromMetaData($id, $table) {
+        $item = \DB::table($table)->where('id', $id)->first();
+        if (!isset($item->metadata)) return false;
+
+        $html = "";
+        if (isset($item->metadata)) {
+            $metaInfo = json_decode($item->metadata, true);
+            if (in_array('icon', $metaInfo)) {
+                $html = '<a class="btn btn-default"><i class="fa '.$metaInfo['icon'].'"></i></a>';
+            }
+        }
+        return $html;
+    }
     public static function paginate($items,$perPage)
     {
         $pageStart = Request::get('page', 1);

@@ -25,6 +25,7 @@ class SideMenuItem extends Model
         'parent_id',
         'role_id',
         'name',
+        'type',
         'path',
         'icon',
         'sort',
