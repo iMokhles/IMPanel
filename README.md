@@ -29,6 +29,7 @@ If you discover any security related issues, please email imokhles@imokhles.com 
 ## Credits
 
 - [iMokhles](http://github.com/imokhles)
+- [Backpack for Laravel](https://github.com/Laravel-Backpack)
 
 ## License
 
